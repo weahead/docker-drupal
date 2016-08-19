@@ -1,0 +1,47 @@
+{
+  "name": "drupal7",
+  "description": "Composer template for Drupal 7 projects",
+  "repositories": [{
+    "type": "composer",
+    "url": "https://packages.drupal.org/7"
+  }],
+  "require": {
+    "composer/installers": "~1.0",
+    "derhasi/composer-preserve-paths": "0.1.*",
+    "wikimedia/composer-merge-plugin": "1.3.1",
+    "drupal/drupal": "7.50.0"
+  },
+  "conflict": {
+    "drupal/core": "8.*"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "vendor-dir": "vendor"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "installer-paths": {
+      "web/": ["type:drupal-core"],
+      "web/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
+      "web/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"],
+      "web/sites/all/libraries/{$name}/": ["type:drupal-library"],
+      "web/sites/all/drush/{$name}/": ["type:drupal-drush"],
+      "web/profiles/{$name}/": ["type:drupal-profile"]
+    },
+    "preserve-paths": [
+      "web/sites/all/modules/contrib",
+      "web/sites/all/themes/contrib",
+      "web/sites/all/libraries",
+      "web/sites/all/drush",
+      "web/sites/default/settings.php",
+      "web/sites/default/files"
+    ],
+    "merge-plugin": {
+      "include": [
+        "web/sites/all/composer.json"
+      ],
+      "recurse": false
+    }
+  }
+}
