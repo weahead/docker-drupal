@@ -1,6 +1,6 @@
 # Drupal in a container
 
-[![Drupal 7.x: 7.50](https://img.shields.io/badge/Drupal--7.x:-7.50-green.svg)](https://github.com/weahead/docker-drupal/tree/v7.x)
+[![Drupal 7.x: 7.51](https://img.shields.io/badge/Drupal--7.x:-7.51-green.svg)](https://github.com/weahead/docker-drupal/tree/v7.x)
 [![Drupal 8.x: Not yet](https://img.shields.io/badge/Drupal--8.x:-Not_yet-green.svg)](https://github.com/weahead/docker-drupal/tree/v8.x)
 
 
@@ -24,7 +24,7 @@ This container includes:
 An example of usage can be found at [example](example).
 
 1. Create a `Dockerfile` with `FROM weahead/drupal:<tag>`. Where `tag` is a
-   version number like `7.50.0`.
+   version number like `7.51.0`.
 
 2. Make sure you add `VOLUME /var/www/html` to the end of your `Dockerfile`.
 
