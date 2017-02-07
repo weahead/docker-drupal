@@ -12,6 +12,7 @@ RUN apk --no-cache add \
       libpng-dev \
       su-exec \
       mysql-client \
+      postfix \
     && docker-php-ext-configure gd --with-png-dir=/usr/include --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv mcrypt mysqli mbstring pdo_mysql
 

@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+stopit () {
+	postfix stop;
+	echo "postfix with pid `cat /var/spool/postfix/pid/master.pid | sed 's/ //g'` stopped"
+}
+
+reloadit () {
+	postfix reload;
+	echo "postfix with pid `cat /var/spool/postfix/pid/master.pid | sed 's/ //g'` reloaded"
+}
+
+trap stopit SIGINT SIGTERM
+trap reloadit SIGHUP
+
+mkdir -p /var/spool/postfix/etc
+cp /etc/hosts /var/spool/postfix/etc/hosts
+
+postfix start
+
+if [ -f "/var/spool/postfix/pid/master.pid" ]; then
+	echo "postfix started with pid `cat /var/spool/postfix/pid/master.pid | sed 's/ //g'`"
+else
+	echo "Can't find pid file for postfix at /var/spool/postfix/pid/master.pid?"
+fi
+
+sleep 3
+
+while kill -0 "`cat /var/spool/postfix/pid/master.pid | sed 's/ //g'`"; do
+  sleep 5
+done
