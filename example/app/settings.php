@@ -2,9 +2,22 @@
 
 # Simple example of settings.php
 
-# Change this value to some random string.
-$drupal_hash_salt = 'CHANGE ME';
+$config_directories = array();
 
+# Change this value to some random string.
+$settings['hash_salt'] = 'CHANGE ME';
+
+# Common settings
+$settings['update_free_access'] = FALSE;
+$settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
+
+# Directories to ignore
+$settings['file_scan_ignore_directories'] = [
+    'node_modules',
+    'bower_components',
+];
+
+# Database credentials given via env variables
 $databases = array (
   'default' =>
     array (
@@ -14,21 +27,10 @@ $databases = array (
           'username' => getenv('DB_USER'),
           'password' => getenv('DB_PASSWORD'),
           'host' => getenv('DB_HOST'),
-          'port' => '',
+          'port' => '3306',
           'driver' => 'mysql',
+          'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
           'prefix' => '',
         ),
     ),
 );
-
-$update_free_access = FALSE;
-
-ini_set('session.gc_probability', 1);
-ini_set('session.gc_divisor', 100);
-ini_set('session.gc_maxlifetime', 200000);
-ini_set('session.cookie_lifetime', 2000000);
-
-$conf['404_fast_paths_exclude'] = '/\/(?:styles)\//';
-$conf['404_fast_paths'] = '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
-$conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
-

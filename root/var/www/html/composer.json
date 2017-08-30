@@ -1,18 +1,18 @@
 {
-  "name": "drupal7",
-  "description": "Composer template for Drupal 7 projects",
+  "name": "drupal8",
+  "description": "Composer template for Drupal 8 projects",
   "repositories": [{
     "type": "composer",
-    "url": "https://packages.drupal.org/7"
+    "url": "https://packages.drupal.org/8"
   }],
   "require": {
-    "composer/installers": "~1.0",
+    "composer/installers": "~1.4",
     "derhasi/composer-preserve-paths": "0.1.*",
-    "wikimedia/composer-merge-plugin": "1.3.1",
-    "drupal/drupal": "7.50.0"
+    "wikimedia/composer-merge-plugin": "1.4.1",
+    "drupal/drupal": "8.3.7"
   },
   "conflict": {
-    "drupal/core": "8.*"
+    "drupal/core": "7.*"
   },
   "config": {
     "preferred-install": "dist",

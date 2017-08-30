@@ -1,4 +1,4 @@
-FROM weahead/drupal:7.50.0
+FROM weahead/drupal:8.3.7
 
 # Add your custom directives here...
 

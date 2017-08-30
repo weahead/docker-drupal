@@ -31,8 +31,8 @@ RUN apk --no-cache add --virtual build-deps\
   && rm -rf "$GNUPGHOME" /tmp/* \
   && apk del build-deps
 
-ENV COMPOSER_VERSION=1.2.0\
-    DRUSH_VERSION=8.1.3
+ENV COMPOSER_VERSION=1.5.1\
+    DRUSH_VERSION=8.1.13
 
 RUN curl -L -o composer-setup.php https://getcomposer.org/installer \
     && curl -L -o composer-setup.sig https://composer.github.io/installer.sig \
@@ -59,4 +59,5 @@ ONBUILD RUN mv /var/www/html/web/sites/all/settings.php /var/www/html/web/sites/
 
 ONBUILD RUN chown -R www-data:www-data /var/www/html \
     && rm composer.lock \
+    && su-exec www-data composer clearcache \
     && su-exec www-data composer install --prefer-dist
