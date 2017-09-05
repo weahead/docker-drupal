@@ -1,42 +1,56 @@
 {
   "name": "drupal8",
   "description": "Composer template for Drupal 8 projects",
-  "repositories": [{
-    "type": "composer",
-    "url": "https://packages.drupal.org/8"
-  }],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
   "require": {
-    "composer/installers": "~1.4",
-    "derhasi/composer-preserve-paths": "0.1.*",
-    "wikimedia/composer-merge-plugin": "1.4.1",
-    "drupal/drupal": "8.3.7"
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6",
+    "symfony/console": "~3.2.8",
+    "drupal-composer/drupal-scaffold": "^2.2",
+    "drupal/console": "^1.0.1",
+    "drupal/core": "8.4.0-beta1",
+    "webflo/drupal-finder": "^1.0.0",
+    "webmozart/path-util": "^2.3",
+    "wikimedia/composer-merge-plugin": "1.4.1"
   },
-  "conflict": {
-    "drupal/core": "7.*"
+  "require-dev": {
+    "behat/mink": "1.7.x-dev",
+    "behat/mink-goutte-driver": "^1.2",
+    "drupal/coder": "^8.2.12",
+    "jcalderonzumba/gastonjs": "^1.0.2",
+    "jcalderonzumba/mink-phantomjs-driver": "^0.3.1",
+    "mikey179/vfsstream": "^1.2",
+    "phpunit/phpunit": ">=4.8.35 <5",
+    "phpspec/prophecy": "^1.4",
+    "symfony/css-selector": "~3.2.8",
+    "symfony/phpunit-bridge": "~3.2.8"
   },
   "config": {
     "preferred-install": "dist",
-    "vendor-dir": "vendor"
+    "vendor-dir": "vendor",
+    "sort-packages": true
+  },
+  "scripts": {
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "extra": {
     "installer-paths": {
-      "web/": ["type:drupal-core"],
-      "web/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
-      "web/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"],
-      "web/sites/all/libraries/{$name}/": ["type:drupal-library"],
-      "web/sites/all/drush/{$name}/": ["type:drupal-drush"],
-      "web/profiles/{$name}/": ["type:drupal-profile"]
+      "web/core": ["type:drupal-core"],
+      "web/libraries/{$name}/": ["type:drupal-library"],
+      "web/modules/contrib/{$name}/": ["type:drupal-module"],
+      "web/profiles/contrib/{$name}/": ["type:drupal-profile"],
+      "web/themes/contrib/{$name}/": ["type:drupal-theme"],
+      "drush/contrib/${name}": ["type:drupal-drush"],
+      "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+      "web/themes/custom/{$name}/": ["type:drupal-custom-theme"]
     },
-    "preserve-paths": [
-      "web/sites/all/modules/contrib",
-      "web/sites/all/themes/contrib",
-      "web/sites/all/libraries",
-      "web/sites/all/drush",
-      "web/sites/default/settings.php",
-      "web/sites/default/files"
-    ],
     "merge-plugin": {
       "include": [
         "web/sites/all/composer.json"

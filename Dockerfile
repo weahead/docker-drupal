@@ -1,4 +1,4 @@
-FROM php:7.0.9-fpm-alpine
+FROM php:7.1.8-fpm-alpine
 
 MAINTAINER We ahead <docker@weahead.se>
 
@@ -32,7 +32,8 @@ RUN apk --no-cache add --virtual build-deps\
   && apk del build-deps
 
 ENV COMPOSER_VERSION=1.5.1\
-    DRUSH_VERSION=8.1.13
+    DRUSH_VERSION=9.0.0-beta4\
+    DRUPAL_VERSION=8.4.0-beta1
 
 RUN curl -L -o composer-setup.php https://getcomposer.org/installer \
     && curl -L -o composer-setup.sig https://composer.github.io/installer.sig \
@@ -55,9 +56,12 @@ ENTRYPOINT ["/init"]
 
 ONBUILD COPY app/ /var/www/html/web/sites/all/
 
-ONBUILD RUN mv /var/www/html/web/sites/all/settings.php /var/www/html/web/sites/default/settings.php 2> /dev/null || true
-
 ONBUILD RUN chown -R www-data:www-data /var/www/html \
     && rm composer.lock \
     && su-exec www-data composer clearcache \
-    && su-exec www-data composer install --prefer-dist
+    && su-exec www-data composer install --prefer-dist \
+    && mkdir -p /var/www/html/web/sites/default/files/translations\
+    && curl -L -o /var/www/html/web/sites/default/files/translations/drupal-${DRUPAL_VERSION}.sv.po http://ftp.drupal.org/files/translations/8.x/drupal/drupal-${DRUPAL_VERSION}.sv.po\
+    && chown -R www-data:www-data /var/www/html \
+    && mv -f /var/www/html/web/sites/all/settings.php /var/www/html/web/sites/default/settings.php 2> /dev/null || true\
+    && mv /var/www/html/web/sites/all/services.yml /var/www/html/web/sites/default/services.yml 2> /dev/null || true
