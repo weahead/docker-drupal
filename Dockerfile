@@ -1,6 +1,6 @@
 FROM php:7.1.8-fpm-alpine
 
-MAINTAINER We ahead <docker@weahead.se>
+LABEL maintainer="We ahead <docker@weahead.se>"
 
 RUN apk --no-cache add \
       git \
@@ -61,7 +61,7 @@ ONBUILD RUN chown -R www-data:www-data /var/www/html \
     && su-exec www-data composer clearcache \
     && su-exec www-data composer install --prefer-dist \
     && mkdir -p /var/www/html/web/sites/default/files/translations\
-    && curl -L -o /var/www/html/web/sites/default/files/translations/drupal-${DRUPAL_VERSION}.sv.po http://ftp.drupal.org/files/translations/8.x/drupal/drupal-${DRUPAL_VERSION}.sv.po\
+    && curl -L -o /var/www/html/web/sites/default/files/translations/drupal-${DRUPAL_VERSION}.sv.po http://ftp.drupal.org/files/translations/8.x/drupal/drupal-${DRUPAL_VERSION}.sv.po \
     && chown -R www-data:www-data /var/www/html \
-    && mv -f /var/www/html/web/sites/all/settings.php /var/www/html/web/sites/default/settings.php 2> /dev/null || true\
+    && mv -f /var/www/html/web/sites/all/settings.php /var/www/html/web/sites/default/settings.php 2> /dev/null || true \
     && mv /var/www/html/web/sites/all/services.yml /var/www/html/web/sites/default/services.yml 2> /dev/null || true
