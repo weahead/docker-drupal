@@ -16,7 +16,7 @@ RUN apk --no-cache add \
     && docker-php-ext-configure gd --with-png-dir=/usr/include --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv mcrypt mysqli mbstring pdo_mysql
 
-ENV S6_VERSION=1.19.1.1\
+ENV S6_VERSION=1.20.0.0\
     S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
 RUN apk --no-cache add --virtual build-deps\
