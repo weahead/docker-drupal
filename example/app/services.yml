@@ -25,3 +25,9 @@ parameters:
     maxAge: false
     # Sets the Access-Control-Allow-Credentials header.
     supportsCredentials: true
+
+    ### Dev, remove on production
+    twig.config:
+      debug: true
+      auto_reload: true
+      cache: false

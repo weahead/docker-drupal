@@ -34,3 +34,27 @@ $databases = array (
         ),
     ),
 );
+
+
+### Dev settings, remove on production
+
+# Enable asserts
+assert_options(ASSERT_ACTIVE, TRUE);
+\Drupal\Component\Assertion\Handle::register();
+
+# Dev services
+$settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
+
+# Verbose logging
+$config['system.logging']['error_level'] = 'verbose';
+
+# Disable aggregation
+$config['system.performance']['css']['preprocess'] = FALSE;
+$config['system.performance']['js']['preprocess'] = FALSE;
+
+# Turn off cache during development
+$settings['cache']['bins']['render'] = 'cache.backend.null';
+$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+
+# Enable access to /rebuild.php
+$settings['rebuild_access'] = TRUE;

@@ -32,8 +32,8 @@ RUN apk --no-cache add --virtual build-deps\
   && apk del build-deps
 
 ENV COMPOSER_VERSION=1.5.1\
-    DRUSH_VERSION=9.0.0-beta4\
-    DRUPAL_VERSION=8.4.0-beta1
+    DRUSH_VERSION=9.0.0-beta6\
+    DRUPAL_VERSION=8.4.0
 
 RUN curl -L -o composer-setup.php https://getcomposer.org/installer \
     && curl -L -o composer-setup.sig https://composer.github.io/installer.sig \

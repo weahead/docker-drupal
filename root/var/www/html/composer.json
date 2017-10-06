@@ -13,7 +13,7 @@
     "symfony/console": "~3.2.8",
     "drupal-composer/drupal-scaffold": "^2.2",
     "drupal/console": "^1.0.1",
-    "drupal/core": "8.4.0-beta1",
+    "drupal/core": "8.4.0",
     "webflo/drupal-finder": "^1.0.0",
     "webmozart/path-util": "^2.3",
     "wikimedia/composer-merge-plugin": "1.4.1"
