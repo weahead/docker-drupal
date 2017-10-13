@@ -1,7 +1,7 @@
 # Drupal in a container
 
 [![Drupal 7.x: 7.51](https://img.shields.io/badge/Drupal--7.x:-7.51-green.svg)](https://github.com/weahead/docker-drupal/tree/v7.x)
-[![Drupal 8.x: Not yet](https://img.shields.io/badge/Drupal--8.x:-Not_yet-green.svg)](https://github.com/weahead/docker-drupal/tree/v8.x)
+[![Drupal 8.x: 8.4.0](https://img.shields.io/badge/Drupal--8.x:-8.4.0-green.svg)](https://github.com/weahead/docker-drupal/tree/v8.x)
 
 
 ## Layout of this repository
