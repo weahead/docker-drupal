@@ -55,7 +55,8 @@
       "include": [
         "web/sites/all/composer.json"
       ],
-      "recurse": false
+      "recurse": false,
+      "merge-extra": true
     }
   }
 }
