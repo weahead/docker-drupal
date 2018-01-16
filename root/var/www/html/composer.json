@@ -1,6 +1,11 @@
 {
   "name": "drupal8",
   "description": "Composer template for Drupal 8 projects",
+  "authors": [
+    {
+      "name": "We ahead AB <http://weahead.se>"
+    }
+  ],
   "repositories": [
     {
       "type": "composer",
