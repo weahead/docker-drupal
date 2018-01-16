@@ -32,9 +32,7 @@ RUN apk --no-cache add --virtual build-deps\
   && rm -rf "$GNUPGHOME" /tmp/* \
   && apk del build-deps
 
-ENV COMPOSER_VERSION=1.6.2\
-    DRUSH_VERSION=9.0.0-beta6\
-    DRUPAL_VERSION=8.4.0
+ENV COMPOSER_VERSION=1.6.2
 
 RUN curl -L -o composer-setup.php https://getcomposer.org/installer \
     && curl -L -o composer-setup.sig https://composer.github.io/installer.sig \
@@ -45,24 +43,31 @@ RUN curl -L -o composer-setup.php https://getcomposer.org/installer \
       --version=${COMPOSER_VERSION}\
     && rm -rf composer-setup.php composer-setup.sig \
     && su-exec www-data composer global require "hirak/prestissimo:^0.3" \
-    && su-exec www-data composer global require "drush/drush:${DRUSH_VERSION}" \
-    && ln -s /home/www-data/.composer/vendor/bin/drush /usr/local/bin/drush
+    && su-exec www-data composer clear-cache
 
-COPY root /
+COPY root/var/ /var/
 
 RUN chown -R www-data:www-data /var/www/html \
-    && su-exec www-data composer install --prefer-dist
+    && su-exec www-data composer install --prefer-dist \
+    && su-exec www-data composer clear-cache
+
+COPY root/etc/ /etc/
+
+COPY root/usr/ /usr/
 
 ENTRYPOINT ["/init"]
 
-ONBUILD COPY app/ /var/www/html/web/sites/all/
+ONBUILD COPY app/modules/ /var/www/html/web/modules/custom/
+
+ONBUILD COPY app/themes/ /var/www/html/web/themes/custom/
+
+ONBUILD COPY app/composer.json /var/www/html/web/composer.json
+
+ONBUILD COPY config/settings.php /var/www/html/web/sites/default/settings.php
+
+ONBUILD COPY config/services.yml /var/www/html/web/sites/default/services.yml
 
 ONBUILD RUN chown -R www-data:www-data /var/www/html \
     && rm composer.lock \
-    && su-exec www-data composer clearcache \
     && su-exec www-data composer install --prefer-dist \
-    && mkdir -p /var/www/html/web/sites/default/files/translations\
-    && curl -L -o /var/www/html/web/sites/default/files/translations/drupal-${DRUPAL_VERSION}.sv.po http://ftp.drupal.org/files/translations/8.x/drupal/drupal-${DRUPAL_VERSION}.sv.po \
-    && chown -R www-data:www-data /var/www/html \
-    && mv -f /var/www/html/web/sites/all/settings.php /var/www/html/web/sites/default/settings.php 2> /dev/null || true \
-    && mv /var/www/html/web/sites/all/services.yml /var/www/html/web/sites/default/services.yml 2> /dev/null || true
+    && su-exec www-data composer clearcache
