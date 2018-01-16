@@ -32,7 +32,7 @@ RUN apk --no-cache add --virtual build-deps\
   && rm -rf "$GNUPGHOME" /tmp/* \
   && apk del build-deps
 
-ENV COMPOSER_VERSION=1.5.1\
+ENV COMPOSER_VERSION=1.6.2\
     DRUSH_VERSION=9.0.0-beta6\
     DRUPAL_VERSION=8.4.0
 
