@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
 
-docker build -t weahead/drupal:dev .
+docker build --pull -t weahead/drupal:8.x .
