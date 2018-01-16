@@ -1,4 +1,4 @@
-FROM php:7.1.8-fpm-alpine
+FROM php:7.0.27-fpm-alpine
 
 LABEL maintainer="We ahead <docker@weahead.se>"
 
