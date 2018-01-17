@@ -3,9 +3,10 @@ version: '2'
 services:
   drupal:
     volumes:
+      - ./app/libraries:/var/www/html/web/sites/all/libraries
       - ./app/modules:/var/www/html/web/modules/custom
       - ./app/themes:/var/www/html/web/themes/custom
-      - ./app/composer.json:/var/www/html/web/composer.json
+      - ./config/sync:/var/www/html/config
       - ./config/development.services.yml:/var/www/html/web/sites/development.services.yml
       - ./config/services.yml:/var/www/html/web/sites/default/services.yml
       - ./config/settings.local.php:/var/www/html/web/sites/default/settings.local.php
