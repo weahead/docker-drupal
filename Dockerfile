@@ -65,9 +65,11 @@ ONBUILD COPY app/themes/ /var/www/html/web/themes/custom/
 
 ONBUILD COPY app/composer.json /var/www/html/web/composer.json
 
-ONBUILD COPY config/settings.php /var/www/html/web/sites/default/settings.php
+ONBUILD COPY config/sync/ /var/www/html/config/sync/
 
 ONBUILD COPY config/services.yml /var/www/html/web/sites/default/services.yml
+
+ONBUILD COPY config/settings.php /var/www/html/web/sites/default/settings.php
 
 ONBUILD RUN chown -R www-data:www-data /var/www/html \
     && rm composer.lock \
