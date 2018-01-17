@@ -57,6 +57,8 @@ COPY root/usr/ /usr/
 
 ENTRYPOINT ["/init"]
 
+ONBUILD COPY app/libraries/ /var/www/html/web/sites/all/libraries/
+
 ONBUILD COPY app/modules/ /var/www/html/web/modules/custom/
 
 ONBUILD COPY app/themes/ /var/www/html/web/themes/custom/
