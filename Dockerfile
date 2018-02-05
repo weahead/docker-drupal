@@ -15,7 +15,14 @@ RUN apk --no-cache add \
       postfix \
       patch \
     && docker-php-ext-configure gd --with-png-dir=/usr/include --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv mcrypt mysqli mbstring pdo_mysql
+    && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv mcrypt mysqli mbstring pdo_mysql \
+    && apk --no-cache add --virtual build-deps \
+      autoconf \
+      g++ \
+      make \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && apk del build-deps
 
 ENV S6_VERSION=1.21.2.2\
     S6_BEHAVIOUR_IF_STAGE2_FAILS=2
