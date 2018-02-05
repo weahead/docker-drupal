@@ -57,21 +57,20 @@ COPY root/usr/ /usr/
 
 ENTRYPOINT ["/init"]
 
-ONBUILD COPY app/libraries/ /var/www/html/web/sites/all/libraries/
+ONBUILD COPY --chown=www-data:www-data app/composer.json /var/www/html/web/composer.json
 
-ONBUILD COPY app/modules/ /var/www/html/web/modules/custom/
-
-ONBUILD COPY app/themes/ /var/www/html/web/themes/custom/
-
-ONBUILD COPY app/composer.json /var/www/html/web/composer.json
-
-ONBUILD COPY config/sync/ /var/www/html/config/sync/
-
-ONBUILD COPY config/services.yml /var/www/html/web/sites/default/services.yml
-
-ONBUILD COPY config/settings.php /var/www/html/web/sites/default/settings.php
-
-ONBUILD RUN chown -R www-data:www-data /var/www/html \
-    && rm composer.lock \
+ONBUILD RUN rm composer.lock \
     && su-exec www-data composer install --prefer-dist \
     && su-exec www-data composer clearcache
+
+ONBUILD COPY --chown=www-data:www-data config/services.yml /var/www/html/web/sites/default/services.yml
+
+ONBUILD COPY --chown=www-data:www-data config/settings.php /var/www/html/web/sites/default/settings.php
+
+ONBUILD COPY --chown=www-data:www-data config/sync/ /var/www/html/config/sync/
+
+ONBUILD COPY --chown=www-data:www-data app/libraries/ /var/www/html/web/sites/all/libraries/
+
+ONBUILD COPY --chown=www-data:www-data app/modules/ /var/www/html/web/modules/custom/
+
+ONBUILD COPY --chown=www-data:www-data app/themes/ /var/www/html/web/themes/custom/
