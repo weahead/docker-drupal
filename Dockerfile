@@ -1,4 +1,4 @@
-FROM php:7.0.27-fpm-alpine
+FROM php:7.2.3-fpm-alpine
 
 LABEL maintainer="We ahead <docker@weahead.se>"
 
@@ -8,14 +8,13 @@ RUN apk --no-cache add \
       coreutils \
       freetype-dev \
       libjpeg-turbo-dev \
-      libmcrypt-dev \
       libpng-dev \
       su-exec \
       mysql-client \
       postfix \
       patch \
     && docker-php-ext-configure gd --with-png-dir=/usr/include --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv mcrypt mysqli mbstring pdo_mysql \
+    && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv mysqli mbstring pdo_mysql \
     && apk --no-cache add --virtual build-deps \
       autoconf \
       g++ \
