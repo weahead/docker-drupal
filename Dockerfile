@@ -19,8 +19,8 @@ RUN apk --no-cache add \
       autoconf \
       g++ \
       make \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
+    && pecl install opcache xdebug \
+    && docker-php-ext-enable opcache xdebug \
     && apk del build-deps
 
 ENV S6_VERSION=1.21.2.2\
