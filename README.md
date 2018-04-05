@@ -1,7 +1,5 @@
 # Drupal 8 in a container
 
-[![Drupal 8.4.0](https://img.shields.io/badge/Drupal-8.4.0-green.svg)](https://github.com/weahead/docker-drupal/tree/v8.x)
-
 
 ## Layout of this repository
 
