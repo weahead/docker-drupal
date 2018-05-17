@@ -39,7 +39,7 @@
     ],
     "merge-plugin": {
       "include": [
-        "web/sites/all/composer.json"
+        "web/composer.json"
       ],
       "recurse": false
     }

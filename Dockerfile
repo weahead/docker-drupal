@@ -46,17 +46,28 @@ RUN curl -L -o composer-setup.php https://getcomposer.org/installer \
     && su-exec www-data composer global require "drush/drush:${DRUSH_VERSION}" \
     && ln -s /home/www-data/.composer/vendor/bin/drush /usr/local/bin/drush
 
-COPY root /
+COPY root/var/ /var/
 
 RUN chown -R www-data:www-data /var/www/html \
-    && su-exec www-data composer install --prefer-dist
+    && su-exec www-data composer install --prefer-dist \
+    && su-exec www-data composer clear-cache
+
+COPY root/etc/ /etc/
+
+COPY root/usr/ /usr/
 
 ENTRYPOINT ["/init"]
 
-ONBUILD COPY app/ /var/www/html/web/sites/all/
+ONBUILD COPY --chown=www-data:www-data app/composer.json /var/www/html/web/composer.json
 
-ONBUILD RUN mv /var/www/html/web/sites/all/settings.php /var/www/html/web/sites/default/settings.php 2> /dev/null || true
+ONBUILD RUN rm composer.lock \
+    && su-exec www-data composer install --prefer-dist \
+    && su-exec www-data composer clearcache
 
-ONBUILD RUN chown -R www-data:www-data /var/www/html \
-    && rm composer.lock \
-    && su-exec www-data composer install --prefer-dist
+ONBUILD COPY --chown=www-data:www-data config/settings.php /var/www/html/web/sites/default/settings.php
+
+ONBUILD COPY --chown=www-data:www-data app/libraries/ /var/www/html/web/sites/all/libraries/
+
+ONBUILD COPY --chown=www-data:www-data app/modules/ /var/www/html/web/sites/all/modules/custom/
+
+ONBUILD COPY --chown=www-data:www-data app/themes/ /var/www/html/web/sites/all/themes/custom/
