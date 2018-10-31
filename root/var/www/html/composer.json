@@ -65,6 +65,15 @@
       "web/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
       "web/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"]
     },
+    "merge-plugin": {
+      "include": [
+        "web/composer.json"
+      ],
+      "recurse": false,
+      "replace": true,
+      "merge-extra": true,
+      "merge-extra-deep": true
+    },
     "composer-exit-on-patch-failure": true,
     "patches": {
       "cweagans/composer-patches": {
@@ -81,12 +90,6 @@
       "web/sites/all/themes/custom",
       "web/sites/all/translations",
       "web/sites/default"
-    ],
-    "merge-plugin": {
-      "include": [
-        "web/composer.json"
-      ],
-      "recurse": false
-    }
+    ]
   }
 }
