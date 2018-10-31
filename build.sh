@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t weahead/drupal:7.x .
+docker build -t weahead/drupal:7.60.0 .
