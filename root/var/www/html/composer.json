@@ -15,7 +15,7 @@
     "ext-xml": "*",
     "composer/installers": "^1.2",
     "composer/semver": "^1.4",
-    "cweagans/composer-patches": "^1.6",
+    "cweagans/composer-patches": "1.6.5",
     "drupal-composer/preserve-paths": "^0.1",
     "drupal/composer_autoloader": "^1.0",
     "drupal/drupal": "7.50.0",
@@ -65,9 +65,10 @@
       "web/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
       "web/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"]
     },
+    "composer-exit-on-patch-failure": true,
     "patches": {
       "cweagans/composer-patches": {
-        "Call the preserve paths hooks" : "https://github.com/SebCorbin/composer-patches/commit/1cb9bacba51f8bba0c5f3f322c3bb61e4ceae974.patch"
+        "Call the preserve paths hooks" : "https://gist.githubusercontent.com/michaellopez/495f205b36647cfc7dcbd70d4de1db8e/raw/da28caf9c2ee6a556f368f6ba4f83392284d6f37/composer-patches-1.6.5-call-the-preserve-paths-hooks.patch"
       }
     },
     "preserve-paths": [
