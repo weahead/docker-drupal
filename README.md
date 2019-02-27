@@ -21,7 +21,7 @@ This container includes:
 An example of usage can be found at [example](example).
 
 1. Create a `Dockerfile` with `FROM weahead/drupal:<tag>`. Where `tag` is a
-   version number like `8.4.0`.
+   version number like `8.5.11`.
 
 2. Make sure you add `VOLUME /var/www/html` to the end of your `Dockerfile`.
 
