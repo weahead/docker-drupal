@@ -21,7 +21,7 @@ This container includes:
 An example of usage can be found at [example](example).
 
 1. Create a `Dockerfile` with `FROM weahead/drupal:<tag>`. Where `tag` is a
-   version number like `8.6.0`.
+   version number like `8.7.0`.
 
 2. Make sure you add `VOLUME /var/www/html` to the end of your `Dockerfile`.
 
@@ -35,7 +35,7 @@ An example of usage can be found at [example](example).
 
    More information can be found in [Drupals Community Documentation](https://www.drupal.org/node/2718229).
 
-5. Optionally, place a `settings.php` file at `app/settings.php`. It will be 
+5. Optionally, place a `settings.php` file at `app/settings.php`. It will be
    installed in the correct place inside the container at build time. *Skip this
    step if you plan on running the Drupal installation steps rather than
    importing an existing installation.*
