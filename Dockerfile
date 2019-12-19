@@ -2,6 +2,10 @@ FROM php:7.2.3-fpm-alpine
 
 LABEL maintainer="We ahead <docker@weahead.se>"
 
+COPY root/etc/ /etc/
+
+COPY root/usr/ /usr/
+
 RUN apk --no-cache add \
       git \
       tar \
@@ -56,10 +60,6 @@ COPY root/var/ /var/
 RUN chown -R www-data:www-data /var/www/html \
     && su-exec www-data composer install --prefer-dist \
     && su-exec www-data composer clear-cache
-
-COPY root/etc/ /etc/
-
-COPY root/usr/ /usr/
 
 ENTRYPOINT ["/init"]
 
