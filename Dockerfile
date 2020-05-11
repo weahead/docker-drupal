@@ -1,4 +1,4 @@
-FROM php:7.2.3-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 LABEL maintainer="We ahead <docker@weahead.se>"
 
@@ -10,6 +10,7 @@ RUN apk --no-cache add \
       git \
       tar \
       coreutils \
+      oniguruma-dev \
       freetype-dev \
       libjpeg-turbo-dev \
       libpng-dev \
@@ -17,7 +18,7 @@ RUN apk --no-cache add \
       mysql-client \
       postfix \
       patch \
-    && docker-php-ext-configure gd --with-png-dir=/usr/include --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv mysqli mbstring pdo_mysql \
     && apk --no-cache add --virtual build-deps \
       autoconf \
@@ -42,7 +43,7 @@ RUN apk --no-cache add --virtual build-deps\
   && rm -rf "$GNUPGHOME" /tmp/* \
   && apk del build-deps
 
-ENV COMPOSER_VERSION=1.6.2
+ENV COMPOSER_VERSION=1.10.6
 
 RUN curl -L -o composer-setup.php https://getcomposer.org/installer \
     && curl -L -o composer-setup.sig https://composer.github.io/installer.sig \

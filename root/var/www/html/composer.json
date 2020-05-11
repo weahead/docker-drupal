@@ -1,5 +1,5 @@
 {
-  "name": "drupal8",
+  "name": "weahead/drupal8",
   "description": "Composer template for Drupal 8 projects",
   "authors": [
     {
@@ -17,15 +17,12 @@
     "cweagans/composer-patches": "^1.6.5",
     "drupal-composer/drupal-scaffold": "^2.5",
     "drupal/console": "^1.0.2",
-    "drupal/core": "8.7.0",
+    "drupal/core": "8.8.5",
     "drush/drush": "^9.0.0",
     "vlucas/phpdotenv": "^2.4",
     "webflo/drupal-finder": "^1.0.0",
     "webmozart/path-util": "^2.3",
     "wikimedia/composer-merge-plugin": "~1.0"
-  },
-  "require-dev": {
-    "webflo/drupal-core-require-dev": "8.7.0"
   },
   "conflict": {
     "drupal/drupal": "*",
@@ -42,7 +39,9 @@
     "classmap": [
       "scripts/composer/ScriptHandler.php"
     ],
-    "files": ["load.environment.php"]
+    "files": [
+      "load.environment.php"
+    ]
   },
   "scripts": {
     "pre-install-cmd": [
@@ -63,12 +62,24 @@
       "drupal/core": "-p2"
     },
     "installer-paths": {
-      "web/core": ["type:drupal-core"],
-      "web/libraries/{$name}": ["type:drupal-library"],
-      "web/modules/contrib/{$name}": ["type:drupal-module"],
-      "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-      "web/themes/contrib/{$name}": ["type:drupal-theme"],
-      "drush/Commands/{$name}": ["type:drupal-drush"]
+      "web/core": [
+        "type:drupal-core"
+      ],
+      "web/libraries/{$name}": [
+        "type:drupal-library"
+      ],
+      "web/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "web/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "web/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/Commands/{$name}": [
+        "type:drupal-drush"
+      ]
     },
     "drupal-scaffold": {
       "source": "https://raw.githubusercontent.com/drupal/drupal/{version}/{path}"
